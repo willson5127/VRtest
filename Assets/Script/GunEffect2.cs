@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GunEffect2 : MonoBehaviour
 {
-    public Transform rayPoint;
+    [SerializeField] Transform rayPoint;
 
     private LineRenderer line;
     private AudioSource audio;
