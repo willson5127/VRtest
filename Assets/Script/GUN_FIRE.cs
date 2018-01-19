@@ -7,12 +7,21 @@ public class GUN_FIRE : MonoBehaviour {
     //槍枝變數
     //public int ammo = 30;
 
-    public GameObject shoot; // 匯入一個假設遊戲物件
-    public GunEffect2 gunEffect; // 匯入開槍反應之物件
+    [SerializeField]
+    GameObject shoot; // 匯入一個假設遊戲物件
+    [SerializeField]
+    GunEffect2 gunEffect; // 匯入開槍反應之物件
+    [SerializeField]
+    GameObject bullet;
 
-    public int fireDamage = 100;
-    public float fireRate = 0.15f;
-    public float fireRange = 100f;
+    [SerializeField]
+    float ShootForce;
+    [SerializeField]
+    int fireDamage = 100;
+    [SerializeField]
+    float fireRate = 0.15f;
+    [SerializeField]
+    float fireRange = 100f;
 
     private float fireInterval;
     private string fireMode;
@@ -60,8 +69,12 @@ public class GUN_FIRE : MonoBehaviour {
         if (Physics.Raycast(rayOrign, shoot.transform.forward, out hit, fireRange))
         {
             //hit.collider.transform.root.SendMessage("ApplyDamage", fireDamage);
-
             //gunEffect.HandleHit(hit);
+            print(hit.point);
+            GameObject Clone = Instantiate(bullet, shoot.transform.position, shoot.transform.rotation);
+            Transform T_shoot = shoot.transform;
+            Clone.GetComponent<Rigidbody>().AddForce(T_shoot.forward * ShootForce);
+
         }
 
         gunEffect.GunShoot();
